@@ -1,0 +1,10 @@
+[project]
+name = "12stom-talon"
+version = "0.1.0"
+description = "Telegram bot that monitors free doctor appointment slots at 12th Minsk City Clinical Dental Polyclinic"
+requires-python = ">=3.12"
+dependencies = [
+    "aiogram>=3.12,<4.0",
+    "httpx>=0.28,<1.0",
+    "pydantic-settings>=2.4,<3.0",
+]

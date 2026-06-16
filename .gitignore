@@ -1,0 +1,36 @@
+# UV
+.venv/
+uv.lock
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# Env
+.env
+.env.*
+
+# Logs
+*.log
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data
+data/
+
+# Tool caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
