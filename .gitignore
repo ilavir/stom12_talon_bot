@@ -28,6 +28,7 @@ Thumbs.db
 
 # Data
 data/
+state.json
 
 # Tool caches
 .mypy_cache/
