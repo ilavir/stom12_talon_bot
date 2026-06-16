@@ -71,13 +71,14 @@ async def cmd_status(message: types.Message) -> None:
 async def notify_free_slots(bot: Bot, slots: list[dict]) -> None:
     if not slots:
         return
-    for slot in slots:
+    for chat_id in settings.chat_id_list:
+        for slot in slots:
+            await bot.send_message(
+                chat_id,
+                _slot_text(slot),
+                disable_web_page_preview=True,
+            )
         await bot.send_message(
-            settings.telegram_chat_id,
-            _slot_text(slot),
-            disable_web_page_preview=True,
+            chat_id,
+            f"Всего новых свободных талонов: {len(slots)}",
         )
-    await bot.send_message(
-        settings.telegram_chat_id,
-        f"Всего новых свободных талонов: {len(slots)}",
-    )
