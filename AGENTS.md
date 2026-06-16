@@ -52,6 +52,7 @@ Schedule response per doctor entry contains `hasFree` (bool) and arrays `morning
 |-----|---------|-------------|
 | `TELEGRAM_BOT_TOKEN` | — | Bot token from @BotFather |
 | `TELEGRAM_CHAT_ID` | — | Target chat for notifications |
+| `CLINIC_BASE_URL` | `https://12gksp.medtalon.by` | Clinic site base URL |
 | `DOCTOR_IDS` | `1437` | Comma-separated doctor IDs |
 | `DAYS_TO_SCAN` | `5` | How many future days to check |
 | `CHECK_INTERVAL` | `3600` | Seconds between checks |

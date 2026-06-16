@@ -1,12 +1,12 @@
 import json
 import logging
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from pathlib import Path
 
-from config import settings
 from clinic_api import ClinicClient
+from config import settings
 
-STATE_FILE = Path("/app/data/state.json")
+STATE_FILE = Path(settings.state_file_path)
 log = logging.getLogger(__name__)
 
 
@@ -48,11 +48,10 @@ async def check_free_slots() -> list[dict]:
                     key = _slot_key(slot)
                     if key and key not in previously:
                         slot["_doctor_id"] = doctor_id
-                        slot["_doctor_name"] = clinic.find_doctor_name(
-                            schedule, doctor_id
-                        )
-                        slot["_cabinet"] = clinic.find_doctor_cabinet(
-                            schedule, doctor_id
+                        slot["_doctor_name"] = await clinic.find_doctor_name(doctor_id)
+                        slot["_cabinet"] = await clinic.find_doctor_cabinet(doctor_id)
+                        slot["_doctor_translit"] = await clinic.find_doctor_translit(
+                            doctor_id
                         )
                         slot["_date"] = day.strftime("%d.%m.%Y")
                         new_slots.append(slot)
@@ -63,4 +62,16 @@ async def check_free_slots() -> list[dict]:
         state["notified_slots"][doc_id].append(_slot_key(slot))
 
     _save_state(state)
+
+    if new_slots:
+        for s in new_slots:
+            log.info(
+                "Free slot: doctor=%s date=%s time=%s",
+                s.get("_doctor_id"),
+                s.get("_date"),
+                s.get("talonTime"),
+            )
+    else:
+        log.info("No free slots found for any monitored doctor")
+
     return new_slots

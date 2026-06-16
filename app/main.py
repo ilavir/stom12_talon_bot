@@ -3,8 +3,7 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
-
-from bot import router, notify_free_slots
+from bot import notify_free_slots, router
 from config import settings
 from monitor import check_free_slots
 
