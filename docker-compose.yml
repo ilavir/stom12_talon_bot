@@ -6,4 +6,7 @@ services:
     environment:
       - STATE_FILE_PATH=/app/data/state.json
     volumes:
-      - ./data:/app/data
+      - talon-state:/app/data
+
+volumes:
+  talon-state:
